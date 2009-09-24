@@ -1,6 +1,7 @@
 class CreateRepresentations < ActiveRecord::Migration
   def self.up
     create_table :representations do |t|
+      t.column :model_id, :integer
       t.column :name, :string
       t.column :description, :text
       t.column :active, :boolean
@@ -8,8 +9,6 @@ class CreateRepresentations < ActiveRecord::Migration
       t.column :aformat, :text
       t.timestamps
     end
-    Representation.new(:name => 'Forward', :active => true, :qformat => '%(Front)', :aformat => '%(Back)')
-    Representation.new(:name => 'Reverse', :active => false, :qformat => '%(Back)', :aformat => '%(Front)')
   end
 
   def self.down
