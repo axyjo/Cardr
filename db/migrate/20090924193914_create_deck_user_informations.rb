@@ -23,7 +23,7 @@ class CreateDeckUserInformations < ActiveRecord::Migration
 
       #priorities and postponing
       t.column :high_priority, :string, :null => false, :default => 'PriorityVeryHigh'
-      t.column :med_priority, :string :null => false, :default => 'PriorityHigh'
+      t.column :med_priority, :string, :null => false, :default => 'PriorityHigh'
       t.column :low_priority, :string, :null => false, :default => 'PriorityLow'
       t.column :suspended, :string, :null => false, :default => ''
 
