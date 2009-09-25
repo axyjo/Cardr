@@ -12,18 +12,9 @@
 <%= link_to 'Edit', edit_deck_path(@deck) %> |
 <%= link_to 'Back', decks_path %>
 
-<% if @deck %>
-  <% if @deck.facts %>
-    <h2> Facts </h2>
-    <div id='facts'>
-      <%= render :partial => @deck.facts %>
-    </div>
-  <% end %>
-  <% form_for [@deck, Fact.new] do |f| %>
-    <p>
-      <%= f.label :title, "New Fact" %> <br />
-      <%= f.text_field :title %>
-    </p>
-    <p><%= f.submit "Add Fact" %></p>
-  <% end %>
+<% if @deck.facts %>
+  <h2> Facts </h2>
+  <div id='facts'>
+    <%= render :partial => 'facts/fact' %>
+  </div>
 <% end %>

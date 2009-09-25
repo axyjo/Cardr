@@ -1,0 +1,5 @@
+<% @fields.each do |field| %>
+  <% div_for field do %>
+    <%= link_to field.value, fact_path(field.fact) %>
+  <% end %>
+<% end %>

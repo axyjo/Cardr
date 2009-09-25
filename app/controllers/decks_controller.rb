@@ -11,7 +11,10 @@ class DecksController < ApplicationController
   
   def show
     @deck = Deck.find(params[:id])
-    
+    @fields = []
+    @deck.facts.each do |fact|
+      @fields = @fields + [Field.fact(fact.id).primary[0]]
+    end
     respond_to do |format|
       format.html
       format.xml { render :xml => @deck }
