@@ -4,9 +4,6 @@ class CreateRepresentations < ActiveRecord::Migration
       t.column :model_id, :integer
       t.column :name, :string
       t.column :description, :text
-      t.column :active, :boolean
-      t.column :qformat, :text
-      t.column :aformat, :text
       t.timestamps
     end
   end
