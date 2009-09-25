@@ -5,8 +5,12 @@ ActionController::Routing::Routes.draw do |map|
   map.index 'index', :controller => 'welcome', :action => 'index'
   map.home 'home', :controller => 'welcome', :action => 'index'
   map.resources :sessions
-  map.resources :welcome
   map.resources :users
+  map.resources :welcome
+  map.resources :decks, :has_many => :facts
+  map.resources :models, :has_many => :representations
+  map.resources :representations
+  map.resources :facts, :has_many => :fields
 
   # The priority is based upon order of creation: first created -> highest priority.
 
