@@ -4,40 +4,49 @@ class CreateDeckUserInformations < ActiveRecord::Migration
       t.column :user_id, :integer
       t.column :deck_id, :integer
       t.column :active, :boolean
-      
-      t.column :hard_interval_min, :float
-      t.column :hard_interval_max, :float
-      t.column :mid_interval_min, :float
-      t.column :mid_interval_max, :float
-      t.column :easy_interval_min, :float
-      t.column :easy_interval_max, :float
-      
-      t.column :delay0, :integer
-      t.column :delay1, :integer
-      t.column :delay2, :float
-      
+
+      #initial intervals
+      t.column :hard_interval_min, :float, :null => false, :default => 0.333
+      t.column :hard_interval_max, :float, :null => false, :default => 0.5
+      t.column :mid_interval_min, :float, :null => false, :default => 3.0
+      t.column :mid_interval_max, :float, :null => false, :default => 5.0
+      t.column :easy_interval_min, :float, :null => false, :default => 7.0
+      t.column :easy_interval_max, :float, :null => false, :default => 9.0
+
+      #failure delays
+      t.column :delay0, :integer, :null => false, :default => 600
+      t.column :delay1, :integer, :null => false, :default => 600
+      t.column :delay2, :float, :null => false, :default => 0.0
+
+      #collapsing future cards
       t.column :collapse_time, :datetime
-      
-      t.column :high_priority, :text
-      t.column :med_priority, :text
-      t.column :low_priority, :text
-      
-      t.column :new_card_order, :integer
-      t.column :new_card_spacing, :integer
-      t.column :failed_card_max, :integer
-      t.column :new_cards_per_day, :integer
-      
-      t.column :session_rep_limit, :integer
-      t.column :session_time_limit, :integer
-      
+
+      #priorities and postponing
+      t.column :high_priority, :text, :null => false, :default => 'PriorityVeryHigh'
+      t.column :med_priority, :text, :null => false, :default => 'PriorityHigh'
+      t.column :low_priority, :text, :null => false, :default => 'PriorityLow'
+      t.column :suspended, :text, :null => false, :default => ''
+
+      # 0 is random 1 is by input date
+      t.column :new_card_order, :integer, :null => false, :default => 1
+      #when to show new cards
+      # 0 = distribute, 1 = last, 2 = first
+      t.column :new_card_spacing, :integer, :null => false, :default => 0
+      #limit number of failed cards in play
+      t.column :failed_card_max, :integer, :null => false, :default => 20
+      #number of new cards to show per day
+      t.column :new_cards_per_day, :integer, :null => false, :default => 20
+
+      #count cache, probably unneeded.
       t.column :card_count, :integer
       t.column :fact_count, :integer
       t.column :failed_now_count, :integer
       t.column :failed_soon_count, :integer
       t.column :rev_count, :integer
       t.column :new_count, :integer
+      #revision order
       t.column :rev_card_order, :integer
-      
+
       t.timestamps
     end
   end
