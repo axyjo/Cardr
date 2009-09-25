@@ -22,10 +22,10 @@ class CreateDeckUserInformations < ActiveRecord::Migration
       t.column :collapse_time, :datetime
 
       #priorities and postponing
-      t.column :high_priority, :text, :null => false, :default => 'PriorityVeryHigh'
-      t.column :med_priority, :text, :null => false, :default => 'PriorityHigh'
-      t.column :low_priority, :text, :null => false, :default => 'PriorityLow'
-      t.column :suspended, :text, :null => false, :default => ''
+      t.column :high_priority, :string, :null => false, :default => 'PriorityVeryHigh'
+      t.column :med_priority, :string :null => false, :default => 'PriorityHigh'
+      t.column :low_priority, :string, :null => false, :default => 'PriorityLow'
+      t.column :suspended, :string, :null => false, :default => ''
 
       # 0 is random 1 is by input date
       t.column :new_card_order, :integer, :null => false, :default => 1
