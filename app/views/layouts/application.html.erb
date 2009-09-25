@@ -1,23 +1,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title><%= h(yield(:title) || "Untitled") %></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Cardr | <%= h(yield(:title) || "Untitled") %></title>
     <%= stylesheet_link_tag 'reset', '960', 'application' %>
     <%= javascript_include_tag 'jquery' %>
     <%= yield(:head) %>
   </head>
   <body>
     <div id="container" class="container_12">
-      <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <%- end -%>
-      
+      <div id="user_nav">
+        <%= link_to "Home", root_path %>  |
+        <% if current_user %>
+          <%= link_to "Logout", logout_path %>  
+        <% else %>  
+          <%= link_to "Register", new_user_path %>  |
+          <%= link_to "Log in", login_path %>  
+        <% end %>  
+      </div>
+      <span class="clear"></span>
       <%- if show_title? -%>
         <h1><%=h yield(:title) %></h1>
       <%- end -%>
       
+      <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, :id => "flash_#{name}", :class => "flash" %>
+      <%- end -%>
+      
       <%= yield %>
+    </div>
+    <div id="closure" class="container_12">
+      &copy; 2009 <a href="http://akshayjoshi.com">Akshay Joshi</a>. All rights reserved.
     </div>
   </body>
 </html>

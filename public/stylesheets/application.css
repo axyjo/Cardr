@@ -15,8 +15,8 @@ pre {
   font-size: 11px;
 }
 
-a { color: #000; }
-a:visited { color: #666; }
+a { color: #000; text-decoration:none; }
+a:visited { color: #666; text-decoration:none; }
 a:hover { color: #fff; background-color:#000; }
 
 .fieldWithErrors {
@@ -63,7 +63,38 @@ a:hover { color: #fff; background-color:#000; }
   padding: 1em 1em 1em 1em;
 }
 
+#closure {
+  text-decoration:none;
+  color: #eee;
+}
+
+#closure a,#closure a:visited { color: #eee; }
+
 #user_nav {
   float: right;
   font-size: 12px;
+}
+
+
+h1 {
+  font-size: 150%;
+  font-style: bold;
+  margin-bottom: 5px;
+}
+
+.flash {
+  margin: 10px 10px 10px 10px;
+  padding: 5px 5px 5px 5px;
+}
+
+#flash_error {
+  background-color: #FAA;
+}
+
+#flash_warning {
+  background-color: #FFA;
+}
+
+#flash_notice {
+  background-color: #AFA;
 }
