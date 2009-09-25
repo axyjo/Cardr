@@ -1,0 +1,22 @@
+<p>
+  <b>Name:</b>
+  <%=h @model.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @model.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_model_path(@model) %> |
+<%= link_to 'Back', models_path %>
+
+<% if @model %>
+  <% if @model.representations %>
+    <h2>Representations</h2>
+    <div id='representations'>
+      <%= render :partial => @model.representations %>
+    </div>
+  <% end %>
+<% end %>
