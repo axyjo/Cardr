@@ -1,0 +1,17 @@
+<p>
+  <b>Name:</b>
+  <%=h @representation.name %>
+</p>
+
+<p>
+  <b>Model:</b>
+  <%=h @representation.model.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @representation.description %>
+</p>
+
+<%= link_to 'Edit', edit_representation_path(@representation) %> |
+<%= link_to 'Back', representations_path %>
