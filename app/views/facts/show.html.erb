@@ -1,0 +1,21 @@
+<p>
+  <b>ID:</b>
+  <%=h @fact.id %>
+</p>
+<p>
+  <b>Deck:</b>
+  <%= link_to h(@fact.deck.name), deck_path(@fact.deck) %>
+</p>
+<p>
+  <b>Model:</b>
+  <%= link_to h(@fact.deck.model.name), model_path(@fact.deck.model) %>
+</p>
+<% if @fact.fields %>
+  <div id='fields'>
+    <%= render :partial => @fact.fields %>
+  </div>
+<% end %>
+
+<%= link_to 'Edit', edit_fact_path(@fact) %> |
+<%= link_to 'Back', facts_path %>
+
