@@ -2,48 +2,60 @@ class FactsController < ApplicationController
   before_filter :login_required
   def index
     @facts = Fact.all
-    
+
     respond_to do |format|
       format.html
       format.xml { render :xml => @facts }
     end
   end
-  
+
   def show
     @fact = Fact.find(params[:id])
-    @fields = Field.find(:all, :conditions => {:fact_id => @fact.id})
     respond_to do |format|
       format.html
       format.xml { render :xml => @fact }
     end
   end
-  
+
   def new
-    @fact = Fact.new
+    @fact = Fact.new(:deck_id => params[:id])
+    @deck = Deck.find(params[:id])
+    @deck.model.representations.each do |rep|
+      @fact.fields.build(:representation_id => rep.id)
+    end
     respond_to do |format|
       format.html
       format.xml { render :xml => @fact }
     end
   end
-  
+
   def create
-    @fact = Fact.new(params[:fact])
-    respond_to do |format|
-      if @fact.save
-        flash[:notice] = 'Fact was successfully created.'
-        format.html { redirect_to(@fact) }
-        format.xml  { render :xml => @fact, :status => :created, :location => @fact }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @fact.errors, :status => :unprocessable_entity }
+    @fact = Fact.new(:deck_id => params[:fact][:deck_id])
+    if @fact.save
+      params[:fact][:field_attributes].each do |attributes|
+        f = Field.new(attributes)
+        f.fact_id = @fact.id
+        f.save
+      end
+      @field = Field.fact(@fact.id).representation_id(params[:primary_field_id])[0]
+      @fact.primary_field_id = @field.id
+      respond_to do |format|
+        if @fact.save
+          flash[:notice] = 'Fact was successfully created.'
+          format.html { redirect_to(@fact) }
+          format.xml  { render :xml => @fact, :status => :created, :location => @fact }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @fact.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
-  
+
   def edit
     @fact = Fact.find(params[:id])
   end
-  
+
   def update
     @fact = Fact.find(params[:id])
 
@@ -58,7 +70,7 @@ class FactsController < ApplicationController
       end
     end
   end
-  
+
   def destroy
     @fact = Fact.find(params[:id])
     @fact.destroy

@@ -29,6 +29,8 @@ class RepresentationsController < ApplicationController
   
   def create
     @representation = Representation.new(params[:representation])
+    @model = Model.find(params[:model_id])
+    @representation = @model.representations.build(params[:representation])
     respond_to do |format|
       if @representation.save
         flash[:notice] = 'Representation was successfully created.'

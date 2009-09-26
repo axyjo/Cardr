@@ -2,31 +2,30 @@ class ModelsController < ApplicationController
   before_filter :login_required
   def index
     @models = Model.all
-    
+
     respond_to do |format|
       format.html
       format.xml { render :xml => @models }
     end
   end
-  
+
   def show
     @model = Model.find(params[:id])
-    
+
     respond_to do |format|
       format.html
       format.xml { render :xml => @model }
     end
   end
-  
+
   def new
     @model = Model.new
-    @models = Model.find(:all, :order => :name)
     respond_to do |format|
       format.html
       format.xml { render :xml => @model }
     end
   end
-  
+
   def create
     @model = Model.new(params[:model])
     respond_to do |format|
@@ -40,11 +39,11 @@ class ModelsController < ApplicationController
       end
     end
   end
-  
+
   def edit
     @model = Model.find(params[:id])
   end
-  
+
   def update
     @model = Model.find(params[:id])
 
@@ -59,7 +58,7 @@ class ModelsController < ApplicationController
       end
     end
   end
-  
+
   def destroy
     @model = Model.find(params[:id])
     @model.destroy

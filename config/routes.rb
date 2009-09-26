@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sessions
   map.resources :users
   map.resources :welcome
-  map.resources :decks, :has_many => :facts
+  map.resources :decks, :has_many => [:facts, :fields]
   map.resources :models, :has_many => :representations
   map.resources :representations
   map.resources :facts, :has_many => :fields

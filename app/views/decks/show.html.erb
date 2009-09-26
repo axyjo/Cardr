@@ -8,13 +8,13 @@
   <%=h @deck.description %>
 </p>
 
-
-<%= link_to 'Edit', edit_deck_path(@deck) %> |
-<%= link_to 'Back', decks_path %>
-
 <% if @deck.facts %>
   <h2> Facts </h2>
   <div id='facts'>
     <%= render :partial => 'facts/fact' %>
   </div>
 <% end %>
+
+<%= link_to 'Add fact', new_fact_path()+'/'+@deck.id.to_s %> |
+<%= link_to 'Edit', edit_deck_path(@deck) %> |
+<%= link_to 'Back', decks_path %>

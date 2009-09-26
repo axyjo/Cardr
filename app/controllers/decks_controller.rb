@@ -2,25 +2,28 @@ class DecksController < ApplicationController
   before_filter :login_required
   def index
     @decks = Deck.all
-    
+
     respond_to do |format|
       format.html
       format.xml { render :xml => @decks }
     end
   end
-  
+
   def show
     @deck = Deck.find(params[:id])
     @fields = []
     @deck.facts.each do |fact|
-      @fields = @fields + [Field.fact(fact.id).primary[0]]
+      new_field = [Field.fact(fact.id).primary[0]]
+      if new_field
+        @fields = @fields + new_field
+      end
     end
     respond_to do |format|
       format.html
       format.xml { render :xml => @deck }
     end
   end
-  
+
   def new
     @deck = Deck.new
     @models = Model.find(:all, :order => :name)
@@ -29,7 +32,7 @@ class DecksController < ApplicationController
       format.xml { render :xml => @deck }
     end
   end
-  
+
   def create
     @deck = Deck.new(params[:deck])
     respond_to do |format|
@@ -43,13 +46,13 @@ class DecksController < ApplicationController
       end
     end
   end
-  
+
   def edit
   end
-  
+
   def update
   end
-  
+
   def destroy
     @deck = Deck.find(params[:id])
     @deck.destroy

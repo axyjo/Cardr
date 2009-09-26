@@ -1,19 +1,21 @@
-﻿<h1>Creating new fact</h1>
+﻿<% title "Creating new fact in "+@deck.name %>
 
 <% form_for(@fact) do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :model_id %><br />
-    <%= f.collection_select :model_id, @models, :id, :name %>
+    <%= f.label :primary_field_id %><br />
+    <%= f.collection_select :primary_field_id, @deck.model.representations, :id, :name %>
+    <%= f.hidden_field :deck_id %>
   </p>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
+  <% for field in @fact.fields %>
+    <% fields_for 'fact[field_attributes][]', field do |field_form| %>
+      <p>
+        <%= field_form.label field.representation.name %><br />
+        <%= field_form.text_field :value %>
+        <%= field_form.hidden_field :representation_id %>
+      </p>
+    <% end %>
+  <% end %>
   <p>
     <%= f.submit 'Create' %>
   </p>

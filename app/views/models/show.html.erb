@@ -8,15 +8,31 @@
   <%=h @model.description %>
 </p>
 
+<% if @model.decks %>
+  <h2>Decks</h2>
+  <div id='decks'>
+    <%= render :partial => @model.decks %>
+  </div>
+<% end %>
+
+<% if @model.representations %>
+  <h2>Representations</h2>
+  <div id='representations'>
+    <%= render :partial => @model.representations %>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_model_path(@model) %> |
 <%= link_to 'Back', models_path %>
 
-<% if @model %>
-  <% if @model.representations %>
-    <h2>Representations</h2>
-    <div id='representations'>
-      <%= render :partial => @model.representations %>
-    </div>
-  <% end %>
-<% end %>
+<% remote_form_for [@model, Representation.new] do |f| %>
+  <p>
+    <%= f.label :name, "New Representation" %> <br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description, "Description" %> <br />
+    <%= f.text_area :description %>
+  </p>
+  <p><%= f.submit "Add Representation" %></p>
+<% end %>  
