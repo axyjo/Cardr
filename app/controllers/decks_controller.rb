@@ -46,6 +46,10 @@ class DecksController < ApplicationController
       end
     end
   end
+  
+  def review
+    @deck = Deck.find(params[:id])
+  end
 
   def edit
   end

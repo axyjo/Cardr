@@ -7,8 +7,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sessions
   map.resources :users
   map.resources :welcome
-  map.resources :decks, :has_many => [:facts, :fields]
+  map.resources :cards
+  map.resources :decks, :has_many => [:facts, :fields, :cards]
   map.resources :models, :has_many => :representations
+  map.resources :models, :has_many => :card_representations
   map.resources :representations
   map.resources :facts, :has_many => :fields
 
@@ -30,7 +32,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  
+
   # Sample resource route with more complex sub-resources
   #   map.resources :products do |products|
   #     products.resources :comments

@@ -35,4 +35,23 @@
     <%= f.text_area :description %>
   </p>
   <p><%= f.submit "Add Representation" %></p>
-<% end %>  
+<% end %>
+
+<% if @model.card_representations %>
+  <h2>Card Relations</h2>
+  <div id='card_representations'>
+    <%= render :partial => @model.card_representations %>
+  </div>
+<% end %>
+
+<% remote_form_for [@model, CardRepresentation.new] do |f| %>
+  <p>
+    <%= f.label :question_id %><br />
+    <%= f.collection_select :question_id, @model.representations, :id, :name %>
+  </p>
+  <p>
+    <%= f.label :answer_id %><br />
+    <%= f.collection_select :answer_id, @model.representations, :id, :name %>
+  </p>
+  <p><%= f.submit "Add Representation" %></p>
+<% end %>

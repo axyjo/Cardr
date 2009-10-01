@@ -1,0 +1,2 @@
+module CardRepresentationsHelper
+end

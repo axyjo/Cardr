@@ -11,7 +11,6 @@ class ModelsController < ApplicationController
 
   def show
     @model = Model.find(params[:id])
-
     respond_to do |format|
       format.html
       format.xml { render :xml => @model }
