@@ -27,9 +27,15 @@ class DecksController < ApplicationController
   def new
     @deck = Deck.new
     @models = Model.find(:all, :order => :name)
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @deck }
+    if @models.empty?
+      logger.error("Deck creation attempted but no models created yet.")
+      flash[:notice] = "You must create a model before you create a deck."
+      redirect_to(:action => 'index')
+    else
+      respond_to do |format|
+        format.html
+        format.xml { render :xml => @deck }
+      end
     end
   end
 
