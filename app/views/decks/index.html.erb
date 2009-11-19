@@ -1,26 +1,29 @@
 <% title "Listing decks" %>
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-  </tr>
-
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
 <% @decks.each do |deck| %>
-  <tr>
-    <td><%=h deck.name %></td>
-    <td>
-      <% if deck.description.nil? %>
-        <em>-</em>
-      <% else %>
-        <%=h deck.description %>
-      <% end %>
-    </td>
-    <td><%= link_to 'Show', deck %></td>
-    <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
-    <td><%= link_to 'Destroy', deck, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+    <tr>
+      <td><%=h deck.name %></td>
+      <td>
+        <% if deck.description.nil? %>
+          <em>-</em>
+        <% else %>
+          <%=h deck.description %>
+        <% end %>
+      </td>
+      <td><%= link_to 'Show', deck %></td>
+      <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
+      <td><%= link_to 'Destroy', deck, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
 <% end %>
+  </tbody>
 </table>
 
 <br />
