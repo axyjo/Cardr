@@ -20,7 +20,7 @@
       </td>
       <td><%= link_to 'Show', deck %></td>
       <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
-      <td><%= link_to 'Destroy', deck, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to "#{image_tag("delete.png")}Delete", deck, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
 <% end %>
   </tbody>
