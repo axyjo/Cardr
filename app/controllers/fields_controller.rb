@@ -12,7 +12,7 @@ class FieldsController < ApplicationController
           flash[:notice] = 'Field was successfully created.'
           format.html { redirect_to(@fact) }
           format.xml  { render :xml => @field, :status => :created, :location => @fact }
-        else¶
+        else
           format.html { render :action => "new" }
           format.xml  { render :xml => @fact.errors, :status => :unprocessable_entity }
         end
