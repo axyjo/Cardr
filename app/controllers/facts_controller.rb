@@ -23,9 +23,15 @@ class FactsController < ApplicationController
     @deck.model.representations.each do |rep|
       @fact.fields.build(:representation_id => rep.id)
     end
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @fact }
+    if @deck.model.representations.empty?
+      logger.error("Fact creation attempted but no representations created yet.")
+      flash[:notice] = "You must create a representation for your model before you create a fact."
+      redirect_to(:controller => 'decks' , :action => 'show', :id => @deck.id)
+    else
+      respond_to do |format|
+        format.html
+        format.xml { render :xml => @fact }
+      end
     end
   end
 
