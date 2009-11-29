@@ -34,7 +34,7 @@ class RepresentationsController < ApplicationController
     respond_to do |format|
       if @representation.save
         flash[:notice] = 'Representation was successfully created.'
-        format.html { redirect_to(@representation) }
+        format.html { redirect_to(@model) }
         format.xml  { render :xml => @representation, :status => :created, :location => @representation }
       else
         format.html { render :action => "new" }
