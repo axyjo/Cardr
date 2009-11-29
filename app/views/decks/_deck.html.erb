@@ -1,3 +1,7 @@
 <% div_for deck do %>
-  <b><%= link_to h(deck.name), deck %></b>: <%= deck.description %><br />
+  <b><%= link_to h(deck.name), deck %></b>
+  <% if !deck.description.empty? %>
+    : <%= deck.description %>
+  <% end %>
+  <br />
 <% end %>

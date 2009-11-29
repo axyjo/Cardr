@@ -1,3 +1,7 @@
 <% div_for representation do %>
-  <b><%= representation.name %></b>: <%= representation.description %><br />
+  <b><%= link_to h(representation.name), representation %></b>
+  <% if !representation.description.empty? %>
+    : <%= representation.description %>
+  <% end %>
+  <br />
 <% end %>
