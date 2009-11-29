@@ -1,49 +1,52 @@
-<p>
-  <b>Name:</b>
-  <%=h @model.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @model.description %>
-</p>
-
-<% if @model.decks %>
-  <h2>Decks</h2>
-  <div id='decks'>
-    <%= render :partial => @model.decks %>
-  </div>
-<% end %>
-
-<% if @model.representations %>
-  <h2>Representations</h2>
-  <div id='representations'>
-    <%= render :partial => @model.representations %>
-  </div>
-<% end %>
+<% title "Showing model "+@model.name %>
 
 <%= link_to 'Edit', edit_model_path(@model) %> |
 <%= link_to 'Back', models_path %>
 
-<% remote_form_for [@model, Representation.new] do |f| %>
+<% if !@model.description.empty? %>
   <p>
-    <%= f.label :name, "New Representation" %> <br />
-    <%= f.text_field :name %>
+    <b>Description:</b>
+    <%=h @model.description %>
   </p>
-  <p>
-    <%= f.label :description, "Description" %> <br />
-    <%= f.text_area :description %>
-  </p>
-  <p><%= f.submit "Add Representation" %></p>
 <% end %>
+<br />
 
+<br />
+
+<div id='decks'>
+<h2>Decks</h2>
+<% if @model.decks %>
+    <%= render :partial => @model.decks %>
+  <% end %>
+</div>
+
+<br />
+
+<div id='representations'>
+  <h2>Representations</h2>
+  <% if @model.representations %>
+    <%= render :partial => @model.representations %>
+  <% end %>
+  <% remote_form_for [@model, Representation.new] do |f| %>
+    <p>
+      <%= f.label :name, "New Representation" %> <br />
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :description, "Description" %> <br />
+      <%= f.text_area :description %>
+    </p>
+    <p><%= f.submit "Add Representation" %></p>
+  <% end %>
+</div>
+<br />
+
+<h2>Card Relations</h2>
 <% if @model.card_representations %>
-  <h2>Card Relations</h2>
   <div id='card_representations'>
     <%= render :partial => @model.card_representations %>
   </div>
 <% end %>
-
 <% remote_form_for [@model, CardRepresentation.new] do |f| %>
   <p>
     <%= f.label :question_id %><br />
@@ -53,5 +56,5 @@
     <%= f.label :answer_id %><br />
     <%= f.collection_select :answer_id, @model.representations, :id, :name %>
   </p>
-  <p><%= f.submit "Add Representation" %></p>
+  <p><%= f.submit "Add Relation" %></p>
 <% end %>
