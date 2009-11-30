@@ -13,7 +13,7 @@
 <% if @deck.facts %>
   <h2> Facts </h2>
   <div id='facts'>
-    <%= render :partial => 'facts/fact' %>
+    <%= render :partial => @deck.facts %>
   </div>
 <% end %>
 

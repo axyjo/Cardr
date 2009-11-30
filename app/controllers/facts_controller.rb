@@ -43,13 +43,13 @@ class FactsController < ApplicationController
         f.fact_id = @fact.id
         f.save
       end
-      @field = Field.fact(@fact.id).representation_id(params[:primary_field_id])[0]
+      @field = Field.fact(@fact.id).representation_id(params[:fact][:primary_field_id])[0]
       @fact.primary_field_id = @field.id
       respond_to do |format|
         if @fact.save
           flash[:notice] = 'Fact was successfully created.'
-          format.html { redirect_to(@fact) }
-          format.xml  { render :xml => @fact, :status => :created, :location => @fact }
+          format.html { redirect_to(:controller => 'decks' , :action => 'show', :id => @fact.deck.id)}
+          format.xml  { render :xml => @fact.deck, :status => :created, :location => @fact.deck }
         else
           format.html { render :action => "new" }
           format.xml  { render :xml => @fact.errors, :status => :unprocessable_entity }
